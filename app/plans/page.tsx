@@ -185,11 +185,11 @@ export default function PlansPage() {
           </div>
         )}
       </nav>
-      <div className="flex flex-col lg:flex-row h-[calc(100vh-80px)]">
+      <div className="flex flex-col lg:flex-row lg:h-[calc(100vh-80px)]">
         {/* Sidebar with Sasha's Profile - Fixed, non-scrollable */}
         <div className="lg:w-80 p-4 lg:p-6 mx-8 flex-shrink-0 lg:sticky lg:top-0 lg:h-full">
-          <Card className="bg-white/5 backdrop-blur-md border border-white/10 text-white rounded-3xl h-full">
-            <CardContent className="p-6 text-center flex flex-col justify-center h-full">
+          <Card className="bg-white/5 backdrop-blur-md border border-white/10 text-white rounded-3xl lg:h-full">
+            <CardContent className="p-6 text-center flex flex-col justify-center lg:h-full">
               <div className="mb-6">
                 <Image
                   src="/images/plans/7.jpeg"
