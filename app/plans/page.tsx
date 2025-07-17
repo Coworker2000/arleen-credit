@@ -272,7 +272,7 @@ export default function PlansPage() {
                       height={80}
                       className="rounded-xl flex-shrink-0 w-20 h-20 object-cover"
                     />
-                    <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0 flex flex-col">
                       <h3 className="text-lg font-bold mb-1 leading-tight text-white">
                         {plan.title}
                       </h3>
@@ -292,7 +292,8 @@ export default function PlansPage() {
                         </div>
                       )}
                       <Button
-                        className="w-full bg-purple-600 hover:bg-purple-700 text-white text-base"
+                        className="w-full bg-purple-600 hover:bg-purple-700 text-white text-base self-start"
+                        style={{ minWidth: 0 }}
                         onClick={(e) => {
                           e.stopPropagation();
                           handlePlanSelect(plan);

@@ -1,14 +1,10 @@
 "use client"
 
 import type React from "react"
-
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { ScrollArea } from "@/components/ui/scroll-area"
-// Remove this import
-// import { Logo } from "@/components/logo"
 import { useRouter } from "next/navigation"
 import { Send, ArrowLeft, User, Bot } from "lucide-react"
 import Link from "next/link"
@@ -27,6 +23,8 @@ export default function ChatPage() {
   const [newMessage, setNewMessage] = useState("")
   const [isTyping, setIsTyping] = useState(false)
   const router = useRouter()
+  const chatEndRef = useRef<HTMLDivElement>(null)
+  const messagesContainerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const authStatus = localStorage.getItem("isAuthenticated")
@@ -34,7 +32,6 @@ export default function ChatPage() {
       router.push("/login")
       return
     }
-
     setIsAuthenticated(true)
 
     // Get selected plan from localStorage
@@ -47,13 +44,22 @@ export default function ChatPage() {
     const welcomeMessage: Message = {
       id: "1",
       text: plan
-        ? `Hello! I see you're interested in our ${JSON.parse(plan).title}${JSON.parse(plan).price ? ` for ${JSON.parse(plan).price}` : ""}. I'm here to help you with pricing, payment options, and answer any questions you might have about this program. How can I assist you today?`
+        ? `Hello! I see you're interested in our ${JSON.parse(plan).title}${
+            JSON.parse(plan).price ? ` for ${JSON.parse(plan).price}` : ""
+          }. I'm here to help you with pricing, payment options, and answer any questions you might have about this program. How can I assist you today?`
         : "Hello! Welcome to The Arleen Credit Repair Program. I'm here to help you choose the right plan and answer any questions about our services. How can I assist you today?",
       sender: "agent",
       timestamp: new Date(),
     }
     setMessages([welcomeMessage])
   }, [router])
+
+  useEffect(() => {
+    // Auto-scroll to bottom when new messages arrive
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight
+    }
+  }, [messages, isTyping])
 
   const handleSendMessage = async () => {
     if (!newMessage.trim()) return
@@ -91,7 +97,9 @@ export default function ChatPage() {
         if (plan.isPaymentPlan) {
           return `Great! You've selected our ${plan.title}. This payment plan option allows you to spread the ${plan.price} cost over several months, making it more manageable. We typically offer 3, 6, or 12-month payment plans. Would you like me to break down the monthly payment options for you?`
         }
-        return `Perfect! The ${plan.title} is priced at ${plan.price}${plan.originalPrice ? ` (originally ${plan.originalPrice} - that's a huge savings!)` : ""}. This includes our comprehensive credit repair service with ${plan.subtitle.toLowerCase()}. We also offer payment plan options if you'd prefer to spread the cost. Would you like to proceed with this plan or hear about payment options?`
+        return `Perfect! The ${plan.title} is priced at ${plan.price}${
+          plan.originalPrice ? ` (originally ${plan.originalPrice} - that's a huge savings!)` : ""
+        }. This includes our comprehensive credit repair service with ${plan.subtitle.toLowerCase()}. We also offer payment plan options if you'd prefer to spread the cost. Would you like to proceed with this plan or hear about payment options?`
       }
       return "Our pricing varies depending on the program you choose. Since you're here, I can provide specific details about any plan that interests you. Which program would you like to know more about?"
     }
@@ -116,7 +124,9 @@ export default function ChatPage() {
       return "Great question! The main differences are timeline and price: Our VIP Fast Track Program delivers results in 7-15 days for $897, while our Super Sale program works within 30-45 days for $297. Both use the same proven methods and include full credit analysis, dispute letters, and ongoing support. The VIP program just gets prioritized processing for faster results."
     }
 
-    return `Thank you for your interest in ${plan ? `our ${plan.title}` : "our credit repair services"}! I'm here to answer any questions about pricing, timelines, our process, or help you get started. What would you like to know more about?`
+    return `Thank you for your interest in ${
+      plan ? `our ${plan.title}` : "our credit repair services"
+    }! I'm here to answer any questions about pricing, timelines, our process, or help you get started. What would you like to know more about?`
   }
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -147,10 +157,6 @@ export default function ChatPage() {
                 <span className="sm:hidden">Back</span>
               </Button>
             </Link>
-            {/* Replace:
-            <Logo className="h-8 w-auto" />
-
-            // With: */}
             <h1 className="text-lg font-bold text-white">Chat with Agent</h1>
           </div>
         </div>
@@ -185,17 +191,26 @@ export default function ChatPage() {
 
           {/* Chat Interface */}
           <div className={`${selectedPlan ? "lg:col-span-2" : "lg:col-span-3"} order-1 lg:order-2`}>
-            <Card className="bg-black/40 border-white/20 text-white h-[500px] sm:h-[600px] flex flex-col">
-              <CardHeader>
+            <Card className="bg-black/40 border-white/20 text-white">
+              <CardHeader className="pb-3">
                 <CardTitle className="flex items-center text-base sm:text-lg">
                   <Bot className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   Credit Repair Agent
                 </CardTitle>
               </CardHeader>
 
-              <CardContent className="flex-1 flex flex-col">
-                <ScrollArea className="flex-1 pr-2 sm:pr-4">
-                  <div className="space-y-3 sm:space-y-4">
+              {/* Fixed height container for chat */}
+              <div className="h-[500px] sm:h-[600px] flex flex-col">
+                {/* Messages area - takes up remaining space */}
+                <div className="flex-1 px-6 overflow-hidden">
+                  <div
+                    ref={messagesContainerRef}
+                    className="h-full overflow-y-auto space-y-3 sm:space-y-4 pr-2"
+                    style={{
+                      scrollbarWidth: "thin",
+                      scrollbarColor: "rgba(255, 255, 255, 0.3) transparent",
+                    }}
+                  >
                     {messages.map((message) => (
                       <div
                         key={message.id}
@@ -238,26 +253,30 @@ export default function ChatPage() {
                         </div>
                       </div>
                     )}
+                    <div ref={chatEndRef} />
                   </div>
-                </ScrollArea>
-
-                <div className="flex space-x-2 mt-3 sm:mt-4">
-                  <Input
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    placeholder="Type your message..."
-                    className="bg-black/20 border-white/20 text-white placeholder:text-gray-400 text-xs sm:text-sm"
-                  />
-                  <Button
-                    onClick={handleSendMessage}
-                    className="bg-purple-600 hover:bg-purple-700 px-3 sm:px-4"
-                    disabled={!newMessage.trim()}
-                  >
-                    <Send className="h-3 w-3 sm:h-4 sm:w-4" />
-                  </Button>
                 </div>
-              </CardContent>
+
+                {/* Fixed input area at bottom */}
+                <div className="border-t border-white/10 p-4 bg-black/20">
+                  <div className="flex space-x-2">
+                    <Input
+                      value={newMessage}
+                      onChange={(e) => setNewMessage(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                      placeholder="Type your message..."
+                      className="bg-black/20 border-white/20 text-white placeholder:text-gray-400 text-xs sm:text-sm"
+                    />
+                    <Button
+                      onClick={handleSendMessage}
+                      className="bg-purple-600 hover:bg-purple-700 px-3 sm:px-4"
+                      disabled={!newMessage.trim()}
+                    >
+                      <Send className="h-3 w-3 sm:h-4 sm:w-4" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </Card>
           </div>
         </div>
