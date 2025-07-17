@@ -225,7 +225,7 @@ export default function HomePage() {
                     size="lg"
                     className="bg-gradient-to-r from-white to-gray-200 hover:from-gray-100 hover:to-gray-300 text-black px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all"
                   >
-                    Start 14-Day Free Trial
+                    Get Started
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
