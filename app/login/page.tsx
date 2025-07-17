@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -21,7 +20,6 @@ export default function LoginPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-
     // Simulate login process
     setTimeout(() => {
       localStorage.setItem("isAuthenticated", "true")
@@ -32,8 +30,8 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md bg-black/40 border-white/20 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800 flex items-center justify-center p-4">
+      <Card className="w-full max-w-md bg-white/5 backdrop-blur-md border border-white/10 text-white">
         <CardHeader className="text-center">
           <CardTitle className="text-xl sm:text-2xl font-bold">Welcome Back</CardTitle>
           <CardDescription className="text-gray-300 text-sm sm:text-base">
@@ -43,7 +41,7 @@ export default function LoginPage() {
         <CardContent className="space-y-6">
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-sm sm:text-base">
+              <Label htmlFor="email" className="text-sm sm:text-base text-gray-200">
                 Email
               </Label>
               <Input
@@ -53,11 +51,11 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="bg-black/20 border-white/20 text-white placeholder:text-gray-400 text-sm sm:text-base"
+                className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 text-sm sm:text-base"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-sm sm:text-base">
+              <Label htmlFor="password" className="text-sm sm:text-base text-gray-200">
                 Password
               </Label>
               <div className="relative">
@@ -68,7 +66,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="bg-black/20 border-white/20 text-white placeholder:text-gray-400 pr-10 text-sm sm:text-base"
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 pr-10 text-sm sm:text-base"
                 />
                 <button
                   type="button"
@@ -80,22 +78,21 @@ export default function LoginPage() {
               </div>
             </div>
             <div className="flex justify-end">
-              <Link href="/forgot-password" className="text-xs sm:text-sm text-purple-400 hover:text-purple-300">
+              <Link href="/forgot-password" className="text-xs sm:text-sm text-gray-400 hover:text-white">
                 Forgot password?
               </Link>
             </div>
             <Button
               type="submit"
-              className="w-full bg-purple-600 hover:bg-purple-700 text-sm sm:text-base"
+              className="w-full bg-gradient-to-r from-white to-gray-200 hover:from-gray-100 hover:to-gray-300 text-black text-sm sm:text-base font-semibold"
               disabled={isLoading}
             >
               {isLoading ? "Signing in..." : "Sign In"}
             </Button>
           </form>
-
           <div className="text-center text-xs sm:text-sm text-gray-400">
             Don't have an account?{" "}
-            <Link href="/register" className="text-purple-400 hover:text-purple-300">
+            <Link href="/register" className="text-white hover:text-gray-300">
               Sign up
             </Link>
           </div>

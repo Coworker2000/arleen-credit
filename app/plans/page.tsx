@@ -95,7 +95,7 @@ export default function PlansPage() {
       id: "instant-tradeline",
       title: "$2500 Instant Tradeline",
       subtitle: "Boost Your Credit 40-100 Points Fast",
-      price: "$897",
+      price: "$2500",
       originalPrice: "$3,000",
       buttonText: "I Need This!",
       image: "/images/plans/6.jpeg",
@@ -125,18 +125,16 @@ export default function PlansPage() {
       image: "/images/plans/1.jpeg",
     },
   ]
-
   if (!isAuthenticated) {
     return <div>Loading...</div>
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800">
       {/* Navigation */}
-      <nav className="bg-black/20 backdrop-blur-sm border-b border-white/10 p-4">
+      <nav className="bg-white/5 backdrop-blur-md border-b border-white/10 p-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <h1 className="text-lg sm:text-xl font-bold text-white">The Arleen Credit Repair Program</h1>
-
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
             <Link href="/chat">
@@ -154,7 +152,6 @@ export default function PlansPage() {
               Logout
             </Button>
           </div>
-
           {/* Mobile Menu Button */}
           <Button
             variant="outline"
@@ -165,7 +162,6 @@ export default function PlansPage() {
             {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </Button>
         </div>
-
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 space-y-2">
@@ -189,11 +185,10 @@ export default function PlansPage() {
           </div>
         )}
       </nav>
-
       <div className="flex flex-col lg:flex-row h-[calc(100vh-80px)]">
         {/* Sidebar with Sasha's Profile - Fixed, non-scrollable */}
         <div className="lg:w-80 p-4 lg:p-6 mx-8 flex-shrink-0 lg:sticky lg:top-0 lg:h-full">
-          <Card className="bg-black/60 border-white/20 text-white rounded-3xl h-full">
+          <Card className="bg-white/5 backdrop-blur-md border border-white/10 text-white rounded-3xl h-full">
             <CardContent className="p-6 text-center flex flex-col justify-center h-full">
               <div className="mb-6">
                 <Image
@@ -209,7 +204,7 @@ export default function PlansPage() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="border-white/40 text-white hover:bg-white/10 bg-transparent rounded-full p-3"
+                  className="border-white/20 text-white hover:bg-white/10 bg-transparent rounded-full p-3"
                 >
                   <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
@@ -218,7 +213,7 @@ export default function PlansPage() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="border-white/40 text-white hover:bg-white/10 bg-transparent rounded-full p-3"
+                  className="border-white/20 text-white hover:bg-white/10 bg-transparent rounded-full p-3"
                 >
                   <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-2.84v.44a4.83 4.83 0 01-3.77 4.25A4.84 4.84 0 015.23 12a4.84 4.84 0 013.98 5.31V22h2.84v-4.69A4.84 4.84 0 0115.77 12a4.83 4.83 0 013.82-5.31zM12 13.96a1.96 1.96 0 110-3.92 1.96 1.96 0 010 3.92z" />
@@ -228,7 +223,6 @@ export default function PlansPage() {
             </CardContent>
           </Card>
         </div>
-
         {/* Main Content - Plans Grid - Scrollable */}
         <div className="flex-1 overflow-y-auto">
           <div className="p-4 lg:p-6">
@@ -236,7 +230,7 @@ export default function PlansPage() {
               {plans.map((plan) => (
                 <Card
                   key={plan.id}
-                  className="bg-black/60 border-white/20 text-white hover:bg-black/70 transition-colors cursor-pointer rounded-2xl"
+                  className="bg-white/5 backdrop-blur-md border border-white/10 text-white hover:bg-white/10 transition-colors cursor-pointer rounded-2xl"
                   onClick={() => handlePlanSelect(plan)}
                 >
                   <CardContent className="p-6">
@@ -254,7 +248,7 @@ export default function PlansPage() {
                         <p className="text-gray-300 text-sm mb-3 leading-tight">{plan.subtitle}</p>
                         {plan.price && (
                           <div className="flex items-center space-x-2">
-                            <span className="text-2xl font-bold text-green-400">{plan.price}</span>
+                            <span className="text-2xl font-bold text-white">{plan.price}</span>
                             {plan.originalPrice && (
                               <span className="text-lg text-gray-400 line-through">{plan.originalPrice}</span>
                             )}
@@ -262,10 +256,9 @@ export default function PlansPage() {
                         )}
                       </div>
                     </div>
-
                     {/* Button Row - Full Width */}
                     <Button
-                      className="w-full bg-purple-600 hover:bg-purple-700 text-white text-base"
+                      className="w-full bg-gradient-to-r from-white to-gray-200 hover:from-gray-100 hover:to-gray-300 text-black text-base font-semibold"
                       onClick={(e) => {
                         e.stopPropagation()
                         handlePlanSelect(plan)

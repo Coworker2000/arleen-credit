@@ -141,9 +141,9 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800">
       {/* Navigation */}
-      <nav className="bg-black/20 backdrop-blur-sm border-b border-white/10 p-4">
+      <nav className="bg-white/5 backdrop-blur-md border-b border-white/10 p-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-2 sm:space-x-4">
             <Link href="/plans">
@@ -161,13 +161,12 @@ export default function ChatPage() {
           </div>
         </div>
       </nav>
-
       <div className="max-w-4xl mx-auto p-4 sm:p-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
           {/* Selected Plan Info */}
           {selectedPlan && (
             <div className="lg:col-span-1 order-2 lg:order-1">
-              <Card className="bg-black/40 border-white/20 text-white">
+              <Card className="bg-white/5 backdrop-blur-md border border-white/10 text-white">
                 <CardHeader>
                   <CardTitle className="text-base sm:text-lg">Selected Plan</CardTitle>
                 </CardHeader>
@@ -176,7 +175,7 @@ export default function ChatPage() {
                   <p className="text-gray-300 text-xs sm:text-sm mb-2">{selectedPlan.subtitle}</p>
                   {selectedPlan.price && (
                     <div className="flex items-center space-x-2">
-                      <span className="text-lg sm:text-xl font-bold text-green-400">{selectedPlan.price}</span>
+                      <span className="text-lg sm:text-xl font-bold text-white">{selectedPlan.price}</span>
                       {selectedPlan.originalPrice && (
                         <span className="text-xs sm:text-sm text-gray-400 line-through">
                           {selectedPlan.originalPrice}
@@ -188,17 +187,15 @@ export default function ChatPage() {
               </Card>
             </div>
           )}
-
           {/* Chat Interface */}
           <div className={`${selectedPlan ? "lg:col-span-2" : "lg:col-span-3"} order-1 lg:order-2`}>
-            <Card className="bg-black/40 border-white/20 text-white">
+            <Card className="bg-white/5 backdrop-blur-md border border-white/10 text-white">
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center text-base sm:text-lg">
                   <Bot className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   Credit Repair Agent
                 </CardTitle>
               </CardHeader>
-
               {/* Fixed height container for chat */}
               <div className="h-[500px] sm:h-[600px] flex flex-col">
                 {/* Messages area - takes up remaining space */}
@@ -218,7 +215,7 @@ export default function ChatPage() {
                       >
                         <div
                           className={`max-w-[85%] sm:max-w-[80%] p-2 sm:p-3 rounded-lg ${
-                            message.sender === "user" ? "bg-purple-600 text-white" : "bg-gray-700 text-white"
+                            message.sender === "user" ? "bg-white/10 text-white" : "bg-gray-700 text-white"
                           }`}
                         >
                           <div className="flex items-start space-x-2">
@@ -232,7 +229,6 @@ export default function ChatPage() {
                         </div>
                       </div>
                     ))}
-
                     {isTyping && (
                       <div className="flex justify-start">
                         <div className="bg-gray-700 text-white p-2 sm:p-3 rounded-lg">
@@ -256,20 +252,19 @@ export default function ChatPage() {
                     <div ref={chatEndRef} />
                   </div>
                 </div>
-
                 {/* Fixed input area at bottom */}
-                <div className="border-t border-white/10 p-4 bg-black/20">
+                <div className="border-t border-white/10 p-4 bg-white/5">
                   <div className="flex space-x-2">
                     <Input
                       value={newMessage}
                       onChange={(e) => setNewMessage(e.target.value)}
                       onKeyPress={handleKeyPress}
                       placeholder="Type your message..."
-                      className="bg-black/20 border-white/20 text-white placeholder:text-gray-400 text-xs sm:text-sm"
+                      className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 text-xs sm:text-sm"
                     />
                     <Button
                       onClick={handleSendMessage}
-                      className="bg-purple-600 hover:bg-purple-700 px-3 sm:px-4"
+                      className="bg-gradient-to-r from-white to-gray-200 hover:from-gray-100 hover:to-gray-300 text-black px-3 sm:px-4 font-semibold"
                       disabled={!newMessage.trim()}
                     >
                       <Send className="h-3 w-3 sm:h-4 sm:w-4" />
